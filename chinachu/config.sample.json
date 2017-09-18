@@ -4,12 +4,13 @@
   "temporaryDir": "/tmp/",
 
   "wuiUsers": [
-    "akari:bakuhatsu"
+    "akari:hirakegoma"
   ],
   "wuiAllowCountries": ["JP"],
+  "mirakurunPath": "http://container-mirakurun:40772/",
 
   "wuiPort"             : 10772,
-  "wuiHost"             : "::",
+  "wuiHost"             : "0.0.0.0",
   "wuiTlsKeyPath"       : null,
   "wuiTlsCertPath"      : null,
   "wuiOpenServer"       : false,
@@ -21,9 +22,7 @@
   "wuiConfigurator"     : true,
   "wuiMdnsAdvertisement": true,
 
-  "mirakurunPath": "http://container-mirakurun:40772/",
-
-  "recordedFormat": "[<date:yymmdd-HHMM>][<type><channel>][<tuner>]<title>.m2ts",
-
+  "recordedFormat": "<category>/<title>/<channel-name>/[<date:yymmdd-HHMM>]<fulltitle> - <subtitle>.m2ts",
+  "storageLowSpaceThresholdMB": 3000,
   "storageLowSpaceAction": "remove"
 }

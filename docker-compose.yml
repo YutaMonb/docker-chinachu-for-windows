@@ -1,17 +1,5 @@
 version: '2'
 services:
-  mirakurun:
-    build:
-        context: mirakurun
-    container_name: mirakurun
-    privileged: true
-    ports:
-      - "40772:40772"
-    volumes:
-     - /etc/localtime:/etc/localtime:ro
-     - ./mirakurun/conf:/usr/local/etc/mirakurun
-     - ./mirakurun/db:/usr/local/var/db/mirakurun
-
   chinachu:
     build:
         context: chinachu
@@ -23,11 +11,12 @@ services:
      - "10772:10772"
      - "20772:20772"
      - "5353:5353/udp"
+    environment:
+     - "TZ=JST-9"
     volumes:
-     - /etc/localtime:/etc/localtime:ro
      - ./chinachu/conf/config.json:/usr/local/chinachu/config.json
      - ./chinachu/conf/rules.json:/usr/local/chinachu/rules.json
      - ./chinachu/data:/usr/local/chinachu/data
      - ./recorded:/usr/local/chinachu/recorded
-    links:
-     - mirakurun:container-mirakurun
+    extra_hosts:
+     - "container-mirakurun:192.168.0.2" # Please fix for your environment!
