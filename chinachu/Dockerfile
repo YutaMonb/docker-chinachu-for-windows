@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM node:8.15.0-alpine
 LABEL maintainer "h-mineta <h-mineta@0nyx.net>"
 
 ENV DOCKER="YES"
@@ -8,14 +8,11 @@ ARG BRANCH="master"
 ARG WORK_DIR="/usr/local/chinachu"
 
 ARG USER_NAME="chinachu"
-ARG USER_ID="1000"
 
 RUN set -x \
 	&& apk upgrade --update \
 	&& apk add \
 		bash \
-		'nodejs>=6.2.0' \
-		nodejs-npm \
 		coreutils \
 		curl \
 		procps \
@@ -38,7 +35,7 @@ RUN set -x \
 		eudev-dev \
 		libevent-dev \
 	\
-	&& adduser -D -u ${USER_ID} -h ${WORK_DIR} ${USER_NAME} \
+	&& adduser -D -h ${WORK_DIR} ${USER_NAME} \
 	&& mkdir -p ${WORK_DIR} \
 	&& git clone ${REPOSITORY} ${WORK_DIR} \
 	&& chown -R ${USER_NAME} ${WORK_DIR} \
@@ -56,7 +53,6 @@ RUN set -x \
 	\
 	# cleaning
 	&& cd / \
-	&& npm cache clean \
 	&& apk del --purge .build-deps \
 	&& rm -rf /tmp/* \
 	&& rm -rf /var/cache/apk/*
